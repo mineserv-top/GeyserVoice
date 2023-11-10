@@ -1,0 +1,14 @@
+name: VoiceChat
+version: 1.0.0
+main: io.greitan.uniworlds.VoiceChat
+description: Плагин добавляющий меню для голосового чата.
+author: Alpha
+website: https://uniwords.fun
+api-version: '1.20'
+prefix: VoiceChat
+depend: [NBTAPI, PlaceholderAPI]
+commands:
+  test:
+    description: da
+    usage: /test
+    permission: op

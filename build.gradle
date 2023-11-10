@@ -1,0 +1,40 @@
+plugins {
+    id 'java'
+    id 'com.github.johnrengelman.shadow' version '8.1.1'
+}
+
+group = 'io.greitan'
+version = '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+    maven {
+        name = "CodeMC"
+        url = uri("https://repo.codemc.io/repository/maven-public/")
+    }
+    maven {
+        name = "PaperMC"
+        url = "https://repo.papermc.io/repository/maven-public/"
+    }
+    maven {
+        name = "PlaceholderAPI"
+        url = 'https://repo.extendedclip.com/content/repositories/placeholderapi/'
+    }
+}
+
+dependencies {
+    compileOnly('io.papermc.paper:paper-api:1.20.2-R0.1-SNAPSHOT')
+    compileOnly('me.clip:placeholderapi:2.11.5')
+    compileOnly('org.projectlombok:lombok:1.18.30')
+    annotationProcessor('org.projectlombok:lombok:1.18.30')
+    
+    implementation('com.fasterxml.jackson.core:jackson-databind:2.15.2')
+    implementation('com.fasterxml.jackson.core:jackson-core:2.15.2')
+}
+
+task copyToTestServer(type: Copy) {
+    from shadowJar
+    into "C:/Users/alpha/OneDrive/Documents/GitHub/JavaTest/plugins/"
+}
+
+build.finalizedBy copyToTestServer
