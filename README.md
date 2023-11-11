@@ -14,7 +14,7 @@ Getting Started
 For detailed instructions on installing and configuring GeyserVoice, please refer to the [Wiki](https://github.com/mineserv-top/GeyserVoice/wiki/) section of this repository.
 
 Contributing
-We welcome contributions from the community to improve and expand the functionality of GeyserVoice. If you have ideas, bug reports, or would like to contribute code, please check out our [Wiki](https://github.com/mineserv-top/GeyserVoice/wiki/Contribution) Guidelines.
+We welcome contributions from the community to improve and expand the functionality of GeyserVoice. If you have ideas, bug reports, or would like to contribute code, please check out our [Contribution](https://github.com/mineserv-top/GeyserVoice/wiki/Contribution) Guidelines.
 
 License
 GeyserVoice is licensed under the MIT License. Feel free to use, modify, and distribute the plugin in accordance with the terms of the license.
