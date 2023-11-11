@@ -1,0 +1,16 @@
+config:
+  debug: false
+
+  lang: "en"
+
+  host: localhost
+  port: 9051
+  server-key: "key"
+
+  voice: 
+    proximity-distance: 30
+    proximity-toggle: true
+    voice-effects: true
+
+  players:
+    AlphaBaqpla: "228"

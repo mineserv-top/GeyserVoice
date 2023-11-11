@@ -1,0 +1,29 @@
+# ru
+messages:
+  cmd-reload: "Плагин перезагружен!"
+
+  cmd-bind-connect: "Бинд: сервер голосового чата принял запрос."
+  cmd-bind-disconnect: "Бинд: не удалось подключиться к серверу голосового чата. Для переподключения используйте /voice <bind key>"
+  cmd-bind-invalid-data: "Неверные данные для подключения. Пожалуйста, проверьте ваши данные."
+  cmd-bind-not-available: "Вы не можете подключиться, так как уже подключены."
+
+  cmd-setup-success: "Успешно установлены данные для подключения! Перезагружаю плагин..."
+  cmd-setup-invalid-data: "Не правильные аргументы команды. Использование: /voive setup <host port server-key>."
+
+  cmd-invalid-args: "Неверное использование команды. Использование: /voice <reload | connect>"
+
+  cmd-not-player: "Только игроки могут использовать эту команду!"
+  cmd-not-exists: "Данной команды не существует."
+
+  plugin-reload-pl: "Игрок $player выполнил перезагрузку плагина."
+  plugin-reload: "Игрок $player выполнил перезагрузку плагина."
+
+  plugin-config-loaded: "Конфигурация загружена."
+  plugin-command-execuror: "Исполнители команд включены."
+
+  plugin-connect-connect: "Сервер голосового успешно чата подключен."
+  plugin-connect-disconnect: "Не удалось подключиться к серверу голосового чата. Для переподключения используйте /voice <reload : connect>"
+  plugin-connect-invalid-data: "Подключение не удалось. Неверная конфигурация."
+
+  plugin-autobind-success: "АвтоБинд успешен!"
+  plugin-autobind-failed: "АвтоБинд не удался. Вы не вошли в голосовой чат?"

@@ -1,14 +1,26 @@
-name: VoiceChat
+name: GeyserVoice
 version: 1.0.0
-main: io.greitan.uniworlds.VoiceChat
-description: Плагин добавляющий меню для голосового чата.
+main: io.greitan.mineserv.GeyserVoice
+description: Plugin that adds support for using VoiceCraft on Java servers.
 author: Alpha
-website: https://uniwords.fun
+website: https://mineserv.top
 api-version: '1.20'
-prefix: VoiceChat
-depend: [NBTAPI, PlaceholderAPI]
+prefix: GeyserVoice
+
 commands:
-  test:
-    description: da
-    usage: /test
-    permission: op
+  voice:
+    description: Voice chat main command.
+    usage: /voice
+    permission: voice.cmd
+    
+permissions:
+  voice.cmd:
+    default: true
+  voice.bind:
+    default: true
+  voice.connect:
+    default: op
+  voice.reload:
+    default: op
+  voice.setup:
+    default: op

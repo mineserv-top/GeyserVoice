@@ -1,0 +1,29 @@
+# en
+messages:
+  cmd-reload: "Plugin reloaded!"
+
+  cmd-bind-connect: "Bind success!"
+  cmd-bind-disconnect: "Bind failed! Check your key and try /voice <bind key>"
+  cmd-bind-invalid-data: "Invalid bind data!"
+  cmd-bind-not-available: "You already connected to the voice chat."
+
+  cmd-setup-success: "Setup success! Reloading..."
+  cmd-setup-invalid-data: "Invalid command arguments. Usage: /voive setup <host port server-key>."
+
+  cmd-invalid-args: "Invalid command usage. Usage: /voice <reload | connect>"
+
+  cmd-not-player: "Only players can use this command!"
+  cmd-not-exists: "This command is not exist."
+
+  plugin-reload-pl: "Player $player issued plugin reload."
+  plugin-reload: "Player $player issued plugin reload."
+
+  plugin-config-loaded: "Config loaded."
+  plugin-command-execuror: "Commands executors enabled."
+
+  plugin-connect-connect: "Connected to voice chat server."
+  plugin-connect-disconnect: "Connection to voice chat server had error. Run /voice <reload : connect> to reconect."
+  plugin-connect-invalid-data: "Connection failed. Invalid config."
+
+  plugin-autobind-success: "AutoBind success!"
+  plugin-autobind-failed: "AutoBind failed! You not in the VoiceCraft app?"
