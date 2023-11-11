@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'io.greitan'
-version = '1.0-RELEASE'
+version = project.hasProperty('VERSION') ? project.VERSION : 'UNKNOWN'
 
 repositories {
     mavenCentral()
@@ -32,4 +32,8 @@ dependencies {
     implementation('com.fasterxml.jackson.core:jackson-core:2.15.2')
 }
 
+task deleteUnusableJar(type: Delete) {
+    delete "build/libs/GeyserVoice-"+version+".jar"
+}
+build.finalizedBy deleteUnusableJar
 build.finalizedBy shadowJar

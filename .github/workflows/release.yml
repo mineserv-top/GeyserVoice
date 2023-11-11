@@ -1,9 +1,17 @@
 name: Release
 
 on:
-  push:
-    branches:
-      - release
+  workflow_dispatch:
+    inputs:
+      tag:
+        required: true
+        description: 'Tag'
+      status:
+        required: true
+        description: 'Status (beta, stable)'
+
+env:
+  VERSION: ${{ github.event.inputs.tag }}-${{ github.event.inputs.status }}
 
 jobs:
   build:
@@ -19,6 +27,9 @@ jobs:
         distribution: 'adopt'
         java-version: '17'
 
+    - name: Make gradlew executable
+      run: chmod +x gradlew
+      
     - name: Build with Gradle
       run: ./gradlew build
 
@@ -28,36 +39,38 @@ jobs:
         name: geyser-voice-artifact
         path: build/libs/
 
-  release:
-    runs-on: ubuntu-latest
+  publish_release:
+    name: Publish release
     needs: build
+    runs-on: ubuntu-latest
     steps:
-    - name: Checkout repository
-      uses: actions/checkout@v2
+      - name: Checkout repository
+        uses: actions/checkout@v2
 
-    - name: Set up JDK
-      uses: actions/setup-java@v2
-      with:
-        distribution: 'adopt'
-        java-version: '17'
+      - name: Download artifacts
+        uses: actions/download-artifact@v2
+        with:
+          name: geyser-voice-artifact
+          path: build/libs/
 
-    - name: Download artifacts
-      uses: actions/download-artifact@v2
-      with:
-        name: geyser-voice-artifact
-        path: build/libs/
+      - name: Create release
+        if: github.event.inputs.status == 'stable'
+        uses: ncipollo/release-action@v1
+        with:
+          prerelease: false
+          tag: ${{ github.event.inputs.tag }}
+          artifacts: |
+            build/libs/GeyserVoice-*.jar
+        env:
+          GITHUB_REPOSITORY: mineserv-top/GeyserVoice
 
-    - name: Create release
-      id: create_release
-      uses: softprops/action-gh-release@v1
-      with:
-        files: |
-          build/libs/GeyserVoice-*.jar
-        repo_token: ${{ secrets.GITHUB_TOKEN }}
-        body: Release ${{ github.event_name }} ${{ github.sha }}
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    - name: Set release output
-      id: release_output
-      run: echo "RELEASE_ID=${{ steps.create_release.outputs.id }}" >> $GITHUB_ENV
+      - name: Create pre-release
+        if: github.event.inputs.status != 'stable'
+        uses: ncipollo/release-action@v1
+        with:
+          prerelease: true
+          tag: ${{ github.event.inputs.tag }}
+          artifacts: |
+            build/libs/GeyserVoice-*.jar
+        env:
+          GITHUB_REPOSITORY: mineserv-top/GeyserVoice
