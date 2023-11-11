@@ -43,7 +43,7 @@ public class VoiceCommand implements CommandExecutor, TabCompleter {
         if (sender instanceof Player) {
             Player player = (Player) sender;
             if (args.length >= 1) {
-                if (args[0].equalsIgnoreCase("bind") && player.hasPermission("voice.bind")) {
+                if (args[0].equalsIgnoreCase("bind") && player.hasPermission("voice.bind") && isConnected) {
                     String key = args[1];
                     if(key == null){return false;}
 
@@ -90,8 +90,8 @@ public class VoiceCommand implements CommandExecutor, TabCompleter {
                 } else if (args[0].equalsIgnoreCase("connect") && player.hasPermission("voice.connect")) {
                     if (host != null && serverKey != null) {
                         Boolean force = Boolean.valueOf(args[1]);
-                        Boolean isConnected = plugin.connect(host, port, serverKey, force);
-                        if(isConnected){
+                        Boolean connected = plugin.connect(host, port, serverKey, force);
+                        if(connected){
                             player.sendMessage(Component.text(Language.getMessage(lang, "plugin-connect-connect")).color(NamedTextColor.AQUA));
                         } else {
                             player.sendMessage(Component.text(Language.getMessage(lang, "plugin-connect-disconnect")).color(NamedTextColor.YELLOW));

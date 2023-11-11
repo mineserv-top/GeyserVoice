@@ -14,6 +14,8 @@ local.properties
 .loadpath
 .recommenders
 
+*.vscode
+
 # External tool builders
 .externalToolBuilders/
 
@@ -96,7 +98,6 @@ local.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
 *.war
 *.nar
 *.ear
