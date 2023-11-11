@@ -4,7 +4,7 @@ plugins {
 }
 
 group = 'io.greitan'
-version = '1.0-SNAPSHOT'
+version = '1.0-RELEASE'
 
 repositories {
     mavenCentral()
@@ -31,3 +31,5 @@ dependencies {
     implementation('com.fasterxml.jackson.core:jackson-databind:2.15.2')
     implementation('com.fasterxml.jackson.core:jackson-core:2.15.2')
 }
+
+build.finalizedBy shadowJar
