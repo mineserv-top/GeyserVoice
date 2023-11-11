@@ -43,6 +43,10 @@ jobs:
     name: Publish release
     needs: build
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: write
+      
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
@@ -55,7 +59,7 @@ jobs:
 
       - name: Create release
         if: github.event.inputs.status == 'stable'
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.13.0
         with:
           prerelease: false
           tag: ${{ github.event.inputs.tag }}
@@ -66,7 +70,7 @@ jobs:
 
       - name: Create pre-release
         if: github.event.inputs.status != 'stable'
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.13.0
         with:
           prerelease: true
           tag: ${{ github.event.inputs.tag }}
