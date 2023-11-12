@@ -15,10 +15,12 @@ public class Language {
     private static final Map<String, YamlConfiguration> languageConfigs = new HashMap<>();
     private static String defaultLanguage = "en";
 
-    public static void init(Plugin plugin) {
+    public static void init(Plugin plugin)
+    {
         File languageFolder = new File(plugin.getDataFolder(), "locale");
 
-        if (!languageFolder.exists()) {
+        if (!languageFolder.exists())
+        {
             languageFolder.mkdirs();
             copyResource(plugin, "locale/en.yml", new File(languageFolder, "en.yml"));
             copyResource(plugin, "locale/ru.yml", new File(languageFolder, "ru.yml"));
@@ -27,14 +29,18 @@ public class Language {
         loadLanguages(languageFolder.getAbsolutePath());
     }
 
-    private static void loadLanguages(String pluginFolder) {
+    private static void loadLanguages(String pluginFolder)
+    {
         File languageFolder = new File(pluginFolder);
 
-        if (languageFolder.exists() && languageFolder.isDirectory()) {
+        if (languageFolder.exists() && languageFolder.isDirectory())
+        {
 
-            for (File file : languageFolder.listFiles()) {
+            for (File file : languageFolder.listFiles())
+            {
 
-                if (file.getName().endsWith(".yml")) {
+                if (file.getName().endsWith(".yml"))
+                {
                     String language = file.getName().replace(".yml", "");
                     YamlConfiguration config = YamlConfiguration.loadConfiguration(file);
                     languageConfigs.put(language, config);
@@ -43,20 +49,27 @@ public class Language {
         }
     }
 
-    private static void copyResource(Plugin plugin, String resourceName, File destination) {
-        try (InputStream inputStream = plugin.getResource(resourceName)) {
-            if (inputStream != null) {
+    private static void copyResource(Plugin plugin, String resourceName, File destination)
+    {
+        try (InputStream inputStream = plugin.getResource(resourceName))
+        {
+            if (inputStream != null)
+            {
                 Files.copy(inputStream, destination.toPath(), StandardCopyOption.REPLACE_EXISTING);
             }
-        } catch (IOException e) {
+        } catch (IOException e)
+        {
             e.printStackTrace();
         }
     }
 
-    public static String getMessage(String language, String key) {
-        if (languageConfigs.containsKey(language)) {
+    public static String getMessage(String language, String key)
+    {
+        if (languageConfigs.containsKey(language))
+        {
             YamlConfiguration config = languageConfigs.get(language);
-            if (config.contains("messages." + key)) {
+            if (config.contains("messages." + key))
+            {
                 return config.getString("messages." + key);
             }
         }

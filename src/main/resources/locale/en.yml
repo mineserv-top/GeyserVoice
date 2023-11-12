@@ -10,7 +10,7 @@ messages:
   cmd-setup-success: "Setup success! Reloading..."
   cmd-setup-invalid-data: "Invalid command arguments. Usage: /voive setup <host port server-key>."
 
-  cmd-invalid-args: "Invalid command usage. Usage: /voice <reload | connect>"
+  cmd-invalid-args: "Invalid command usage. Usage: /voice <reload | connect | setup | bind>"
 
   cmd-not-player: "Only players can use this command!"
   cmd-not-exists: "This command is not exist."

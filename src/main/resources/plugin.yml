@@ -7,6 +7,9 @@ website: https://mineserv.top
 api-version: '1.20'
 prefix: GeyserVoice
 
+depend: 
+- PlaceholderAPI
+
 commands:
   voice:
     description: Voice chat main command.
