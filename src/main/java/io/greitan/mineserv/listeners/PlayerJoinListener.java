@@ -1,16 +1,17 @@
 package io.greitan.mineserv.listeners;
 
+import java.util.Objects;
+
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 
-import io.greitan.mineserv.GeyserVoice;
-import io.greitan.mineserv.network.Network;
-import io.greitan.mineserv.network.Payloads.BindingPacket;
-import io.greitan.mineserv.utils.Language;
 import net.kyori.adventure.text.Component;
 import net.kyori.adventure.text.format.NamedTextColor;
+
+import io.greitan.mineserv.GeyserVoice;
+import io.greitan.mineserv.utils.Language;
 
 public class PlayerJoinListener implements Listener {
 
@@ -18,39 +19,35 @@ public class PlayerJoinListener implements Listener {
     private final String lang;
     private boolean isConnected = false;
 
-    public PlayerJoinListener(GeyserVoice plugin, String lang) {
+    // Get the plugin and lang interfaces.
+    public PlayerJoinListener(GeyserVoice plugin, String lang)
+    {
         this.plugin = plugin;
         this.lang = lang;
     }
 
+    // Player Join event.
     @EventHandler
-    public void onPlayerJoin(PlayerJoinEvent event) {
-        Player player = event.getPlayer();
+    public void onPlayerJoin(PlayerJoinEvent event)
+    {
         isConnected = plugin.isConnected();
+        Player player = event.getPlayer();
 
-        String host = plugin.getConfig().getString("config.host");
-        int port = plugin.getConfig().getInt("config.port");
-
-        String link = "http://" + host + ":" + port;
-
-        String serverKey = plugin.getConfig().getString("config.server-key");
         String playerKey = plugin.getConfig().getString("config.players."+player.getName());
 
-        if (isConnected && playerKey != null) {
-            int id = player.getEntityId();
-
-            BindingPacket bindingPacket = new BindingPacket();
-            bindingPacket.playerId = id;
-            bindingPacket.gamertag = player.getName();
-            bindingPacket.playerKey = playerKey;
-            bindingPacket.loginKey = serverKey;
-
-            boolean isBinded = Network.sendPostRequest(link, bindingPacket);
-
-            if (isBinded) {
+        // Auto bind player.
+        if (isConnected && Objects.nonNull(playerKey))
+        {
+            boolean isBinded = plugin.bind(playerKey, player);
+            // Player binded.
+            if (isBinded)
+            {
                 player.sendMessage(Component.text(Language.getMessage(lang, "plugin-autobind-success")).color(NamedTextColor.AQUA));
-            } else {
-                player.sendMessage(Component.text(Language.getMessage(lang, "plugin-autobind-failed")).color(NamedTextColor.YELLOW));
+            }
+            // Bind failed.
+            else
+            {
+                player.sendMessage(Component.text(Language.getMessage(lang, "plugin-autobind-failed")).color(NamedTextColor.RED));
             }
         }
     }

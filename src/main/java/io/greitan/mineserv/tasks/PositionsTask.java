@@ -21,12 +21,14 @@ public class PositionsTask extends BukkitRunnable {
     private final GeyserVoice plugin;
     private boolean isConnected = false;
 
-    public PositionsTask(GeyserVoice plugin) {
+    public PositionsTask(GeyserVoice plugin)
+    {
         this.plugin = plugin;
     }
 
     @Override
-    public void run() {
+    public void run()
+    {
         isConnected = plugin.isConnected();
         String host = plugin.getHost();
         int port = plugin.getPort();
@@ -44,10 +46,12 @@ public class PositionsTask extends BukkitRunnable {
         }
     }
 
-    public List<PlayerData> getPlayerDataList() {
+    public List<PlayerData> getPlayerDataList()
+    {
         List<PlayerData> playerDataList = new ArrayList<>();
 
-        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+        for (Player player : Bukkit.getServer().getOnlinePlayers())
+        {
             Location headLocation = player.getEyeLocation();
 
             LocationData locationData = new LocationData();
@@ -75,8 +79,10 @@ public class PositionsTask extends BukkitRunnable {
         return playerDataList;
     }
 
-    public double getCaveDensity(Player player) {
-        if (!isConnected) {
+    public double getCaveDensity(Player player)
+    {
+        if (!isConnected)
+        {
             return 0.0;
         }
     
@@ -98,15 +104,18 @@ public class PositionsTask extends BukkitRunnable {
         return (block1 + block2 + block3 + block4 + block5 + block6) / 6.0;
     }
     
-    private Location getRelativeLocation(Location base, double x, double y, double z) {
+    private Location getRelativeLocation(Location base, double x, double y, double z)
+    {
         return new Location(base.getWorld(), base.getX() + x, base.getY() + y, base.getZ() + z);
     }
     
-    private String getBlockType(Location location) {
+    private String getBlockType(Location location)
+    {
         return location.getBlock().getType().toString();
     }
 
-    private String getDimensionId(Player player) {
+    private String getDimensionId(Player player)
+    {
         String worldName = player.getWorld().getName();
         return worldName.equals("world") ? "minecraft:overworld" :
         worldName.equals("world_nether") ? "minecraft:nether" :

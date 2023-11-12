@@ -10,7 +10,7 @@ messages:
   cmd-setup-success: "Успешно установлены данные для подключения! Перезагружаю плагин..."
   cmd-setup-invalid-data: "Не правильные аргументы команды. Использование: /voive setup <host port server-key>."
 
-  cmd-invalid-args: "Неверное использование команды. Использование: /voice <reload | connect>"
+  cmd-invalid-args: "Неверное использование команды. Использование: /voice <reload | connect | setup | bind>"
 
   cmd-not-player: "Только игроки могут использовать эту команду!"
   cmd-not-exists: "Данной команды не существует."

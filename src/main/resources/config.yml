@@ -12,5 +12,8 @@ config:
     proximity-toggle: true
     voice-effects: true
 
+    not-in-voice-symbol: "\u2727"
+    in-voice-symbol: "\u2726"
+
   players:
     AlphaBaqpla: "228"
