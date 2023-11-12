@@ -31,7 +31,7 @@ jobs:
       run: chmod +x gradlew
       
     - name: Build with Gradle
-      run: ./gradlew build
+      run: ./gradlew build -PVERSION="${{ env.VERSION }}" 
 
     - name: Archive artifacts
       uses: actions/upload-artifact@v2
