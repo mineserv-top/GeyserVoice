@@ -27,3 +27,5 @@ permissions:
     default: op
   voice.setup:
     default: op
+  voice.settings:
+    default: op
