@@ -27,3 +27,8 @@ messages:
 
   plugin-autobind-success: "AutoBind success!"
   plugin-autobind-failed: "AutoBind failed! You not in the VoiceCraft app?"
+
+  player-disconnect-success: "Player $player left from the voice chat."
+  player-disconnect-failed: "Player $player get error when left from the voice chat."
+
+  player-connect: "Player $player join the voice chat."

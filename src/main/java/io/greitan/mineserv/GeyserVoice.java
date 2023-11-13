@@ -7,16 +7,11 @@ import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import io.greitan.mineserv.commands.VoiceCommand;
-import io.greitan.mineserv.listeners.PlayerJoinListener;
+import io.greitan.mineserv.listeners.*;
 import io.greitan.mineserv.network.Network;
-import io.greitan.mineserv.network.Payloads.BindingPacket;
-import io.greitan.mineserv.network.Payloads.LoginPacket;
-import io.greitan.mineserv.network.Payloads.ServerSettings;
-import io.greitan.mineserv.network.Payloads.UpdateSettingsPacket;
+import io.greitan.mineserv.network.Payloads.*;
 import io.greitan.mineserv.tasks.PositionsTask;
-import io.greitan.mineserv.utils.Language;
-import io.greitan.mineserv.utils.Logger;
-import io.greitan.mineserv.utils.Placeholder;
+import io.greitan.mineserv.utils.*;
 
 import java.util.Objects;
 import java.util.Map;
@@ -43,7 +38,8 @@ public class GeyserVoice extends JavaPlugin {
         getCommand("voice").setExecutor(voiceCommand);
         getCommand("voice").setTabCompleter(voiceCommand);
         new PositionsTask(this).runTaskTimer(this, 0, 1);
-        getServer().getPluginManager().registerEvents(new PlayerJoinListener(this, lang), this);
+        getServer().getPluginManager().registerEvents(new PlayerJoinHandler(this, lang), this);
+        getServer().getPluginManager().registerEvents(new PlayerQuitHandler(this, lang), this);
 
         if (Bukkit.getPluginManager().getPlugin("PlaceholderAPI") != null) {
             new Placeholder(this).register();
@@ -120,6 +116,20 @@ public class GeyserVoice extends JavaPlugin {
         playerBinds.put(player.getName(), bindStatus);
 
         return bindStatus;
+    }
+
+    public Boolean disconnectPlayer(Player player){
+        if(!isConnected || Objects.isNull(host) || Objects.isNull(serverKey) ) return false;
+        String link = "http://" + host + ":" + port;
+
+        // Create request data object.
+        DisconnectPlayerPacket disconnectPlayerPacket = new DisconnectPlayerPacket();
+        disconnectPlayerPacket.loginKey = serverKey;
+        disconnectPlayerPacket.playerId = player.getEntityId();
+
+        boolean disconnectStatus = Network.sendPostRequest(link, disconnectPlayerPacket);
+
+        return disconnectStatus;
     }
 
     public Boolean updateSettings(int proximityDistance, Boolean proximityToggle, Boolean voiceEffects){

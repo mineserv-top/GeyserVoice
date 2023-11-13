@@ -15,5 +15,8 @@ config:
     not-in-voice-symbol: "\u2727"
     in-voice-symbol: "\u2726"
 
+    send-connect-message: true
+    send-disconnect-message: true
+
   players:
     AlphaBaqpla: "228"

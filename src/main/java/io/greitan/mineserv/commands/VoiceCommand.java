@@ -46,8 +46,8 @@ public class VoiceCommand implements CommandExecutor, TabCompleter {
                 if (args[0].equalsIgnoreCase("bind") && player.hasPermission("voice.bind") && isConnected)
                 {
                     if(Objects.nonNull(args[1])){
-                        Boolean isBinded = plugin.bind(args[1], player);
-                        if(isBinded){
+                        Boolean isBound = plugin.bind(args[1], player);
+                        if(isBound){
                             player.sendMessage(Component.text(Language.getMessage(lang, "cmd-bind-connect")).color(NamedTextColor.AQUA));
                         } else {
                             player.sendMessage(Component.text(Language.getMessage(lang, "cmd-bind-disconnect")).color(NamedTextColor.RED));

@@ -33,6 +33,12 @@ public class Payloads {
         public String loginKey = "";
     }
 
+    public static class DisconnectPlayerPacket {
+        public int type = 5;
+        public String loginKey = "";
+        public int playerId = 0;
+    }
+
     public static class ServerSettings {
         public int proximityDistance = 30;
         public boolean proximityToggle = true;

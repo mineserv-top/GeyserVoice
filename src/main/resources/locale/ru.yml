@@ -27,3 +27,8 @@ messages:
 
   plugin-autobind-success: "АвтоБинд успешен!"
   plugin-autobind-failed: "АвтоБинд не удался. Вы не вошли в голосовой чат?"
+
+  player-disconnect-success: "Игрок $player покинул голосовой чат."
+  player-disconnect-failed: "Игрок $player получил ошибку при выходе из голосового чата."
+
+  player-connect: "Игрок $player Присоединился к голосовому чату."
