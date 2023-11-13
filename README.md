@@ -1,6 +1,6 @@
 ## GeyserVoice - Minecraft Proximity Voice Chat Plugin
 
-GeyserVoice is a Java plugin designed to enhance the multiplayer gaming experience on Minecraft servers by integrating the VoiceCraft Proximity Chat application. The plugin facilitates cross-platform communication, allowing players on both Java and Bedrock editions to seamlessly engage in proximity-based voice conversations.
+GeyserVoice is a Java plugin designed to enhance the multiplayer gaming experience on Minecraft servers by integrating the [VoiceCraft](https://github.com/SineVector241/VoiceCraft-MCBE_Proximity_Chat/) Proximity Chat application. The plugin facilitates cross-platform communication, allowing players on both Java and Bedrock editions to seamlessly engage in proximity-based voice conversations.
 
 ### Features
 Cross-Platform Communication: GeyserVoice bridges the gap between Minecraft Java Edition and Bedrock Edition, enabling players on different platforms to communicate through the VoiceCraft Proximity Chat system.
