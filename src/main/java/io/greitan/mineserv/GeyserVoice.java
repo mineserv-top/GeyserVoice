@@ -17,6 +17,9 @@ import java.util.Objects;
 import java.util.Map;
 import java.util.HashMap;
 
+/**
+ * Main plugin class for GeyserVoice.
+ */
 public class GeyserVoice extends JavaPlugin {
     private static @Getter GeyserVoice instance;
     private @Getter boolean isConnected = false;
@@ -27,17 +30,21 @@ public class GeyserVoice extends JavaPlugin {
 
     private String lang;
 
+    /**
+     * Executes upon enabling the plugin.
+     */
     @Override
     public void onEnable() {
         instance = this;
         
         lang = getConfig().getString("config.lang");
+        int positionTaskInterval = getConfig().getInt("position-task-interval", 1);
         Language.init(this);
     
         VoiceCommand voiceCommand = new VoiceCommand(this, lang);
         getCommand("voice").setExecutor(voiceCommand);
         getCommand("voice").setTabCompleter(voiceCommand);
-        new PositionsTask(this).runTaskTimer(this, 0, 1);
+        new PositionsTask(this).runTaskTimer(this, positionTaskInterval, 1);
         getServer().getPluginManager().registerEvents(new PlayerJoinHandler(this, lang), this);
         getServer().getPluginManager().registerEvents(new PlayerQuitHandler(this, lang), this);
 
@@ -48,6 +55,9 @@ public class GeyserVoice extends JavaPlugin {
         this.reload();
     }
 
+    /**
+     * Reloads the plugin configuration and initializes connections.
+     */
     public void reload() {
         saveDefaultConfig();
         reloadConfig();
@@ -67,6 +77,12 @@ public class GeyserVoice extends JavaPlugin {
         updateSettings(proximityDistance, proximityToggle, voiceEffects);
     }
 
+    /**
+     * Connects to the server.
+     *
+     * @param force Indicates whether to force a connection.
+     * @return True if connected successfully, otherwise false.
+     */
     public Boolean connect(Boolean force) {
         if (isConnected && !force) return true;
         
@@ -96,6 +112,13 @@ public class GeyserVoice extends JavaPlugin {
         }
     }
 
+    /**
+     * Binds a player to the voice chat server.
+     *
+     * @param playerKey The key associated with the player.
+     * @param player    The player to bind.
+     * @return True if the binding was successful, otherwise false.
+     */
     public Boolean bind(String playerKey, Player player)
     {
         if(!isConnected || Objects.isNull(host) || Objects.isNull(serverKey) ) return false;
@@ -118,6 +141,13 @@ public class GeyserVoice extends JavaPlugin {
         return bindStatus;
     }
 
+
+    /**
+     * Disconnects a player from the voice chat server.
+     *
+     * @param player The player to disconnect.
+     * @return True if the disconnection was successful, otherwise false.
+     */
     public Boolean disconnectPlayer(Player player){
         if(!isConnected || Objects.isNull(host) || Objects.isNull(serverKey) ) return false;
         String link = "http://" + host + ":" + port;
@@ -132,6 +162,14 @@ public class GeyserVoice extends JavaPlugin {
         return disconnectStatus;
     }
 
+    /**
+     * Updates the voice chat settings.
+     *
+     * @param proximityDistance Proximity distance setting.
+     * @param proximityToggle   Proximity toggle setting.
+     * @param voiceEffects      Voice effects setting.
+     * @return True if settings were updated successfully, otherwise false.
+     */
     public Boolean updateSettings(int proximityDistance, Boolean proximityToggle, Boolean voiceEffects){
         if(!isConnected || Objects.isNull(host) || Objects.isNull(serverKey) ) return false;
         String link = "http://" + host + ":" + port;

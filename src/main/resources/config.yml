@@ -1,22 +1,26 @@
 config:
-  debug: false
+  debug: false                   # Debug mode: enabled (true) or disabled (false)
 
-  lang: "en"
+  lang: "en"                     # Language used in the plugin
 
-  host: localhost
-  port: 9051
-  server-key: "key"
+  host: localhost                # Server host the plugin interacts with
+  port: 9051                     # Port for server interaction
+  server-key: "key"              # Server key for authentication
 
-  voice: 
-    proximity-distance: 30
-    proximity-toggle: true
-    voice-effects: true
+  voice:
+    proximity-distance: 30       # Maximum distance for voice interaction
+    proximity-toggle: true       # Enable/disable proximity feature in voice chat
+    voice-effects: true          # Enable/disable voice chat sound effects
 
-    not-in-voice-symbol: "\u2727"
-    in-voice-symbol: "\u2726"
+    not-in-voice-symbol: "\u2727"      # Symbol for a player not in voice chat (placeholder %voice_status%)
+    in-voice-symbol: "\u2726"          # Symbol for a player in voice chat
 
-    send-connect-message: true
-    send-disconnect-message: true
+    send-connect-message: true         # Send message when a player connects to voice chat
+    send-disconnect-message: true      # Send message when a player disconnects from voice chat
+    
+    # The speed and accuracy of player positioning in voice chat depends on this. 
+    # If you don't get errors - don't change this.
+    position-task-interval: 1            # Interval for player position update task in ticks
 
   players:
-    AlphaBaqpla: "228"
+    AlphaBaqpla: "228"          # Some plugin data or values related to players
