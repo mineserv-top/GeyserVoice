@@ -94,12 +94,12 @@ public class PositionsTask extends BukkitRunnable {
             "TUFF"
         };
     
-        int block1 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), 0, 3, 0))) ? 1 : 0;
-        int block2 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), -3, 0, 0))) ? 1 : 0;
-        int block3 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), 3, 0, 0))) ? 1 : 0;
-        int block4 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), 0, 0, 3))) ? 1 : 0;
-        int block5 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), 0, 0, -3))) ? 1 : 0;
-        int block6 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), 0, -3, 0))) ? 1 : 0;
+        int block1 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), 0, 1, 0))) ? 1 : 0;
+        int block2 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), -1, 0, 0))) ? 1 : 0;
+        int block3 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), 1, 0, 0))) ? 1 : 0;
+        int block4 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), 0, 0, 1))) ? 1 : 0;
+        int block5 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), 0, 0, -1))) ? 1 : 0;
+        int block6 = Arrays.asList(caveBlocks).contains(getBlockType(getRelativeLocation(player.getLocation(), 0, -1, 0))) ? 1 : 0;
 
         return (block1 + block2 + block3 + block4 + block5 + block6) / 6.0;
     }
