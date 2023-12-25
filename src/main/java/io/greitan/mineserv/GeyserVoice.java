@@ -85,28 +85,29 @@ public class GeyserVoice extends JavaPlugin {
      */
     public Boolean connect(Boolean force) {
         if (isConnected && !force) return true;
-        
-        if (Objects.nonNull(host) && Objects.nonNull(serverKey))
-        {
+    
+        if (Objects.nonNull(host) && Objects.nonNull(serverKey)) {
             String link = "http://" + host + ":" + port;
+    
+            // Create MCCommPacket object.
+            MCCommPacket mCCommPacket = new MCCommPacket();
+            mCCommPacket.PacketType = 0; // Assign the appropriate PacketType
+    
             // Create request data object.
             LoginPacket loginPacket = new LoginPacket();
-            loginPacket.loginKey = serverKey;
+            loginPacket.LoginKey = serverKey;
     
-            isConnected = Network.sendPostRequest(link, loginPacket);
-            if (isConnected)
-            {
+            mCCommPacket.PacketData = loginPacket; // Assign the LoginPacket to PacketData
+    
+            isConnected = Network.sendPostRequest(link, mCCommPacket);
+            if (isConnected) {
                 Logger.info(Language.getMessage(lang, "plugin-connect-connect"));
                 return true;
-            } 
-            else
-            {
+            } else {
                 Logger.warn(Language.getMessage(lang, "plugin-connect-disconnect"));
                 return false;
             }
-        }
-        else
-        {
+        } else {
             Logger.warn(Language.getMessage(lang, "plugin-connect-invalid-data"));
             return false;
         }
@@ -119,25 +120,30 @@ public class GeyserVoice extends JavaPlugin {
      * @param player    The player to bind.
      * @return True if the binding was successful, otherwise false.
      */
-    public Boolean bind(String playerKey, Player player)
-    {
-        if(!isConnected || Objects.isNull(host) || Objects.isNull(serverKey) ) return false;
+    public Boolean bind(String playerKey, Player player) {
+        if (!isConnected || Objects.isNull(host) || Objects.isNull(serverKey)) return false;
         String link = "http://" + host + ":" + port;
-
-        getConfig().set("config.players."+player.getName(), playerKey);
+    
+        getConfig().set("config.players." + player.getName(), playerKey);
         saveConfig();
-
+    
+        // Create MCCommPacket object.
+        MCCommPacket mCCommPacket = new MCCommPacket();
+        mCCommPacket.PacketType = 1; // Assign the appropriate PacketType
+    
         // Create request data object.
         BindingPacket bindingPacket = new BindingPacket();
-        bindingPacket.playerId = player.getEntityId();
-        bindingPacket.gamertag = player.getName();
-        bindingPacket.playerKey = playerKey;
-        bindingPacket.loginKey = serverKey;
-                    
-        boolean bindStatus = Network.sendPostRequest(link, bindingPacket);
-
+        bindingPacket.PlayerId = player.getEntityId();
+        bindingPacket.Gamertag = player.getName();
+        bindingPacket.PlayerKey = playerKey;
+        bindingPacket.LoginKey = serverKey;
+    
+        mCCommPacket.PacketData = bindingPacket; // Assign the BindingPacket to PacketData
+    
+        boolean bindStatus = Network.sendPostRequest(link, mCCommPacket);
+    
         playerBinds.put(player.getName(), bindStatus);
-
+    
         return bindStatus;
     }
 
@@ -148,17 +154,23 @@ public class GeyserVoice extends JavaPlugin {
      * @param player The player to disconnect.
      * @return True if the disconnection was successful, otherwise false.
      */
-    public Boolean disconnectPlayer(Player player){
-        if(!isConnected || Objects.isNull(host) || Objects.isNull(serverKey) ) return false;
+    public Boolean disconnectPlayer(Player player) {
+        if (!isConnected || Objects.isNull(host) || Objects.isNull(serverKey)) return false;
         String link = "http://" + host + ":" + port;
-
+    
+        // Create MCCommPacket object.
+        MCCommPacket mCCommPacket = new MCCommPacket();
+        mCCommPacket.PacketType = 5; // Assign the appropriate PacketType
+    
         // Create request data object.
         DisconnectPlayerPacket disconnectPlayerPacket = new DisconnectPlayerPacket();
-        disconnectPlayerPacket.loginKey = serverKey;
-        disconnectPlayerPacket.playerId = player.getEntityId();
-
-        boolean disconnectStatus = Network.sendPostRequest(link, disconnectPlayerPacket);
-
+        disconnectPlayerPacket.LoginKey = serverKey;
+        disconnectPlayerPacket.PlayerId = player.getEntityId();
+    
+        mCCommPacket.PacketData = disconnectPlayerPacket; // Assign the DisconnectPlayerPacket to PacketData
+    
+        boolean disconnectStatus = Network.sendPostRequest(link, mCCommPacket);
+    
         return disconnectStatus;
     }
 
@@ -170,21 +182,23 @@ public class GeyserVoice extends JavaPlugin {
      * @param voiceEffects      Voice effects setting.
      * @return True if settings were updated successfully, otherwise false.
      */
-    public Boolean updateSettings(int proximityDistance, Boolean proximityToggle, Boolean voiceEffects){
-        if(!isConnected || Objects.isNull(host) || Objects.isNull(serverKey) ) return false;
+    public Boolean updateSettings(int proximityDistance, Boolean proximityToggle, Boolean voiceEffects) {
+        if (!isConnected || Objects.isNull(host) || Objects.isNull(serverKey)) return false;
         String link = "http://" + host + ":" + port;
-
-        // Create server settings data object.
-        ServerSettings serverSettings = new ServerSettings();
-        serverSettings.proximityDistance = proximityDistance;
-        serverSettings.proximityToggle = proximityToggle;
-        serverSettings.voiceEffects = voiceEffects;
-        
+    
+        // Create MCCommPacket object.
+        MCCommPacket mCCommPacket = new MCCommPacket();
+        mCCommPacket.PacketType = 3; // Assign the appropriate PacketType
+    
         // Create request data object.
         UpdateSettingsPacket updateSettingsPacket = new UpdateSettingsPacket();
-        updateSettingsPacket.loginKey = serverKey;
-        updateSettingsPacket.settings = serverSettings;
-
-        return Network.sendPostRequest(link, updateSettingsPacket);
+        updateSettingsPacket.LoginKey = serverKey;
+        updateSettingsPacket.ProximityDistance = proximityDistance;
+        updateSettingsPacket.ProximityToggle = proximityToggle;
+        updateSettingsPacket.VoiceEffects = voiceEffects;
+    
+        mCCommPacket.PacketData = updateSettingsPacket; // Assign the UpdateSettingsPacket to PacketData
+    
+        return Network.sendPostRequest(link, mCCommPacket);
     }
 }
