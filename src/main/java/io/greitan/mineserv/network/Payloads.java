@@ -3,46 +3,41 @@ package io.greitan.mineserv.network;
 import java.util.List;
 
 public class Payloads {
+    public static class MCCommPacket {
+        public int PacketType = 0;
+        public Object PacketData = null;
+    }
+
     public static class LoginPacket {
-        public int type = 0;
-        public String loginKey = "";
+        public String LoginKey = "";
     }
 
     public static class BindingPacket {
-        public int type = 1;
-        public String loginKey = "";
-        public int playerId = 0;
-        public String playerKey = "";
-        public String gamertag = "";
+        public String LoginKey = "";
+        public int PlayerId = 0;
+        public String PlayerKey = "";
+        public String Gamertag = "";
     }
 
     public static class UpdatePlayersPacket {
-        public int type = 2;
-        public String loginKey = "";
-        public List<PlayerData> players;
+        public String LoginKey = "";
+        public List<PlayerData> Players;
     }
 
     public static class UpdateSettingsPacket {
-        public int type = 3;
-        public String loginKey = "";
-        public ServerSettings settings = new ServerSettings();
+        public String LoginKey = "";
+        public int ProximityDistance = 30;
+        public boolean ProximityToggle = true;
+        public boolean VoiceEffects = true;
     }
 
     public static class GetSettingsPacket {
-        public int type = 4;
-        public String loginKey = "";
+        public String LoginKey = "";
     }
 
     public static class DisconnectPlayerPacket {
-        public int type = 5;
-        public String loginKey = "";
-        public int playerId = 0;
-    }
-
-    public static class ServerSettings {
-        public int proximityDistance = 30;
-        public boolean proximityToggle = true;
-        public boolean voiceEffects = true;
+        public String LoginKey = "";
+        public int PlayerId = 0;
     }
 
     public static class PlayerData {
